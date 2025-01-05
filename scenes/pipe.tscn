@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b12ae3xiicvrl"]
+
+[ext_resource type="Script" path="res://scripts/pipe.gd" id="1_q6rgq"]
+[ext_resource type="PackedScene" uid="uid://mdy0bc8pkxig" path="res://scenes/pipeUnit.tscn" id="2_qwae5"]
+[ext_resource type="PackedScene" uid="uid://dq6ql46i4g0nl" path="res://scenes/movement_component.tscn" id="3_7287a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu5ii"]
+size = Vector2(80, 900)
+
+[node name="pipe" type="Node2D" node_paths=PackedStringArray("upperPipeUnit", "lowerPipeUnit")]
+script = ExtResource("1_q6rgq")
+upperPipeUnit = NodePath("upperPipeUnit")
+lowerPipeUnit = NodePath("lowerPipeUnit")
+
+[node name="upperPipeUnit" parent="." instance=ExtResource("2_qwae5")]
+
+[node name="lowerPipeUnit" parent="." instance=ExtResource("2_qwae5")]
+rotation = 0.0
+
+[node name="scoreArea" type="Area2D" parent="." groups=["score"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scoreArea"]
+shape = SubResource("RectangleShape2D_pu5ii")
+
+[node name="movementComponent" parent="." node_paths=PackedStringArray("componentParent") instance=ExtResource("3_7287a")]
+componentParent = NodePath("..")

@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce2rg4mjahu07"]
+
+[ext_resource type="PackedScene" uid="uid://cckjjmsjclam7" path="res://scenes/player.tscn" id="1_gndrd"]
+[ext_resource type="PackedScene" uid="uid://btn1tgdh1owi3" path="res://scenes/ground.tscn" id="2_3lcbm"]
+[ext_resource type="PackedScene" uid="uid://b12ae3xiicvrl" path="res://scenes/pipe.tscn" id="3_7qnm7"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="5_akex3"]
+[ext_resource type="Script" path="res://scripts/pipe_generator.gd" id="5_hktyh"]
+[ext_resource type="Script" path="res://scripts/score_label.gd" id="6_2vyl7"]
+[ext_resource type="Script" path="res://scripts/press_warning.gd" id="7_xgke2"]
+
+[node name="world" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_gndrd")]
+position = Vector2(-245, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ground" parent="." instance=ExtResource("2_3lcbm")]
+position = Vector2(0, 268)
+
+[node name="ceiling" parent="." instance=ExtResource("2_3lcbm")]
+position = Vector2(0, -268)
+rotation = 3.14159
+
+[node name="pipeGenerator" type="Node2D" parent="." node_paths=PackedStringArray("generatorTimer")]
+position = Vector2(659, 2)
+script = ExtResource("5_hktyh")
+pipeScene = ExtResource("3_7qnm7")
+generatorTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="pipeGenerator"]
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_akex3")
+
+[node name="scoreLabel" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "0"
+script = ExtResource("6_2vyl7")
+
+[node name="Control" type="Control" parent="CanvasLayer/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pressWarning" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Press space
+
+Aperte espaço"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_xgke2")
+
+[connection signal="timeout" from="pipeGenerator/Timer" to="pipeGenerator" method="_on_timer_timeout"]

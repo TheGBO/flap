@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cigm30rflguvl"]
+
+[ext_resource type="Script" path="res://scripts/jump_particle.gd" id="1_dkpn2"]
+[ext_resource type="PackedScene" uid="uid://dq6ql46i4g0nl" path="res://scenes/movement_component.tscn" id="2_sdpns"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mbs2n"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_max = 5.0
+
+[node name="jumpParticle" type="Node2D"]
+
+[node name="movementComponent" parent="." node_paths=PackedStringArray("componentParent") instance=ExtResource("2_sdpns")]
+componentParent = NodePath("..")
+
+[node name="particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_mbs2n")
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+script = ExtResource("1_dkpn2")

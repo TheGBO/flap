@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://mdy0bc8pkxig"]
+
+[ext_resource type="Texture2D" uid="uid://52ce0kpk5fur" path="res://sprites/64square.png" id="1_1hsci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qc88j"]
+size = Vector2(111, 510)
+
+[node name="pipeUnit" type="Node2D"]
+rotation = 3.14159
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(2.27299e-05, 260)
+scale = Vector2(1.75, 8)
+texture = ExtResource("1_1hsci")
+
+[node name="dangerArea" type="Area2D" parent="." groups=["danger"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dangerArea"]
+position = Vector2(-0.50065, 259)
+shape = SubResource("RectangleShape2D_qc88j")

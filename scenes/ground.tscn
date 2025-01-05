@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://btn1tgdh1owi3"]
+
+[ext_resource type="Texture2D" uid="uid://52ce0kpk5fur" path="res://sprites/64square.png" id="1_5wwx7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gahdy"]
+
+[node name="ground" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("WorldBoundaryShape2D_gahdy")
+
+[node name="protoSprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(-12.0006, 4806)
+scale = Vector2(260.688, 151.188)
+texture = ExtResource("1_5wwx7")

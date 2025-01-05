@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cckjjmsjclam7"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_5kt4c"]
+[ext_resource type="Texture2D" uid="uid://52ce0kpk5fur" path="res://sprites/64square.png" id="2_sgtsn"]
+[ext_resource type="AudioStream" uid="uid://cx5t881ivmvve" path="res://sounds/jump.wav" id="3_hhvi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfh1k"]
+size = Vector2(24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rulec"]
+radius = 16.0
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("jumpSound")]
+script = ExtResource("1_5kt4c")
+jumpSound = NodePath("jump")
+
+[node name="protoSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_sgtsn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_jfh1k")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_rulec")
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hhvi2")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgf36de15hkha"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_j52ea"]
+[ext_resource type="AudioStream" uid="uid://c1ojax52y23v1" path="res://sounds/death.wav" id="2_dg685"]
+[ext_resource type="PackedScene" uid="uid://cigm30rflguvl" path="res://scenes/jump_particle.tscn" id="2_kgvhl"]
+[ext_resource type="AudioStream" uid="uid://c340n1rjqerc0" path="res://sounds/score.wav" id="3_qhtol"]
+
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("deathSound", "scoreSound")]
+script = ExtResource("1_j52ea")
+deathSound = NodePath("death")
+scoreSound = NodePath("score")
+minPipeDelay = 0.7
+maxPipeDelay = 3.75
+minPipeUnitDistance = 35.0
+maxPipeUnitDistance = 120.0
+randomYoffset = 80.0
+jumpParticleScene = ExtResource("2_kgvhl")
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dg685")
+
+[node name="score" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qhtol")
